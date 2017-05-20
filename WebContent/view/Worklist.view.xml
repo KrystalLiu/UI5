@@ -1,0 +1,79 @@
+<mvc:View
+	controllerName="root.controller.Worklist"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns="sap.m">
+	<semantic:FullscreenPage
+		id="page"
+		title="{i18n>appTitle}">
+		<semantic:content>
+			<Table
+				id="table"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				class="sapUiResponsiveMargin sapUiNoMarginTop"
+				width="auto"
+				items="{
+					path: '/Invoices',
+					sorter: {
+						path: 'ShipperName',
+						group : true
+					}
+				}">
+				
+				<headerToolbar>
+					<Toolbar>
+						<Title
+							id="tableHeader"
+							text="{i18n>invoiceListTitle}"/>
+						<ToolbarSpacer/>
+						<SearchField
+							id="searchField"
+							search="onSearch"
+							placeholder="Search"
+							width="auto"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="5em">
+						<Text text="Quantity"/>
+					</Column>
+					<Column
+						demandPopin="false"
+						minScreenWidth="Tablet">
+        				<Text text="Name"/>
+    				</Column>
+    				<Column
+						demandPopin="true"
+						minScreenWidth="Tablet">
+        				<Text text="Status"/>
+    				</Column>
+    				<Column
+            			demandPopin="true"
+            			minScreenWidth="Tablet">
+        				<Text text="Supplier"/>
+					</Column>
+					<Column>
+        				<Text text="Price"/>
+    				</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="onPress">
+						<cells>
+							<Label text="{Quantity}"/>
+							<Label text="{ProductName}"/>
+							<Label text="{path: 'Status', formatter:'.formatter.judgeStatus'}"/>
+							<Label text="{ShipperName}"/>
+							<ObjectNumber
+								number="{ExtendedPrice}"
+								unit="EUR"
+								state="{
+									path: 'ExtendedPrice',
+									formatter: '.formatter.quantityState'
+								}"/>
+						</cells>
+					</ColumnListItem>
+				</items> 
+			</Table>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

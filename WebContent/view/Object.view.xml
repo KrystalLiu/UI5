@@ -1,0 +1,49 @@
+<mvc:View
+	controllerName="root.controller.Object"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m">
+	<semantic:FullscreenPage
+		id="page"
+		navButtonPress="onNavPress"
+		showNavButton="true"
+		title="{i18n>appTitle}">
+		<semantic:content>
+			<ObjectHeader
+				id="objectHeader"
+				responsive="true"
+				intro="{ShipperName}"
+				title="{ProductName}"
+				numberUnit="EUR"
+				numberState="Normal"
+				number="{
+					path: 'ExtendedPrice',
+					formatter: '.formatter.numberUnit'
+				}">
+				<attributes>
+					<ObjectAttribute
+						title="Quantity"
+						text="{
+							path: 'Quantity'
+						}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						title="Order Date"
+						text="{ShippedDate}"/>
+				</statuses>
+			</ObjectHeader>
+			<Panel class="sapUiContentPadding">
+    			<content>
+    			<VBox>
+    			<RatingIndicator class="sapUiResponsiveMargin sapUiNoMarginTop"></RatingIndicator>
+    				<Button class="sapUiResponsiveMargin sapUiNoMarginTop" text="Rate" width="100px" press="rateBtnClick"/>
+    			</VBox>
+    				
+    				
+    			</content>
+			</Panel>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

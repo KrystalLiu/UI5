@@ -1,0 +1,101 @@
+{
+	"_version": "1.4.0",
+	"sap.app": {
+		"_version": "1.2.0",
+		"id": "lhw",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/destinations/northwind/V2/Northwind/Northwind.svc/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+			}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": "root.view.App",
+		"dependencies": {
+			"minUI5Version": "1.36",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "root.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			}
+		},
+		"resources": {
+			"js": [{
+				"uri": "model/formatter.js"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "root.view",
+				"controlId": "app",
+				"controlAggregation": "pages"
+			},
+			"routes": [
+			{
+					"pattern": "",
+					"name": "worklist",
+					"target": "worklist"
+				},
+				{
+					"pattern": "Products/{sPath}",
+					"name": "object",
+					"target": "object"
+				}
+			],
+		"targets": {
+				"worklist": {
+					"viewName": "Worklist",
+					"viewId": "worklist",
+					"viewLevel": 1
+				},
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 2
+				}
+			}
+		}
+	}
+}
